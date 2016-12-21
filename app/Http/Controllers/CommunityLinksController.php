@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\CommunityLink;
-use App\Exceptions\CommunityLinkAlreadySubmitted;
-use App\Http\Requests\CommunityLinkForm;
 use Illuminate\Http\Request;
+use App\Queries\CommunityLinksQuery;
+use App\Http\Requests\CommunityLinkForm;
+use App\Exceptions\CommunityLinkAlreadySubmitted;
 
 class CommunityLinksController extends Controller
 {
+    
     
     /**
      * Show all community links.
@@ -20,10 +22,9 @@ class CommunityLinksController extends Controller
     public function index(Channel $channel = null)
     {
         // Display community links
-        $links = CommunityLink::with('votes')->forChannel($channel)
-            ->where('approved', 1)
-            ->latest('updated_at')
-            ->paginate(3);
+        $links = (new CommunityLinksQuery)->get(
+            request()->exists('popular'), $channel
+        );
 
         $channels = Channel::orderBy('title', 'asc')->get();
         
