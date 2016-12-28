@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('channels', 'ChannelsController@index');
+Route::post('channels', 'ChannelsController@store');
+
 Route::get('community', 'CommunityLinksController@index');
 Route::post('community', 'CommunityLinksController@store');
 Route::get('community/{channel}', 'CommunityLinksController@index');

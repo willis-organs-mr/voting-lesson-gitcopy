@@ -35,9 +35,20 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
+                          <a class="nav-link" href="{{ url('/home') }}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item {{ Request::is('community') ? 'active' : '' }}">
+                          <a class="nav-link" href="{{ url('/community') }}">Community Links</a>
+                        </li>
+                        <li class="nav-item {{ Request::is('channels') ? 'active' : '' }}">
+                          <a class="nav-link" href="{{ url('/channels') }}">Channels</a>
+                        </li>
+                      </ul>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
