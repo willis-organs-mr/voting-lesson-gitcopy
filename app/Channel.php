@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Exceptions\ChannelAlreadyExists;
 use Illuminate\Database\Eloquent\Model;
 
 class Channel extends Model
@@ -32,7 +33,7 @@ class Channel extends Model
         {
             $existing->touch();
 
-            throw new CommunityLinkAlreadySubmitted;    
+            throw new ChannelAlreadyExists;    
         }
         return $this->fill($attributes)->save();
     }
